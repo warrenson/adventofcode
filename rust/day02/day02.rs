@@ -9,22 +9,25 @@ fn main() -> io::Result<()> {
     println!("{}", input_str);
 
     let mut data: Vec<i32> = input_str.split(',').map(|s| s.trim().parse().unwrap()).collect();
+
+    // input state
+    data[1] = 12;
+    data[2] = 2;
+
     let mut i = 0;
     while i < data.len() {
         // exit
         if data[i] == 99 { break; }
+        // get params
+        let a: usize = data[i+1].try_into().unwrap();
+        let b: usize = data[i+2].try_into().unwrap();
+        let c: usize = data[i+3].try_into().unwrap();
         // op1
         if data[i] == 1 {
-            let a: usize = data[i+1].try_into().unwrap();
-            let b: usize = data[i+2].try_into().unwrap();
-            let c: usize = data[i+3].try_into().unwrap();
             data[c] = data[a] + data[b];
         }
         // op2
         if data[i] == 2 {
-            let a: usize = data[i+1].try_into().unwrap();
-            let b: usize = data[i+2].try_into().unwrap();
-            let c: usize = data[i+3].try_into().unwrap();
             data[c] = data[a] * data[b];
         }
         // increment
